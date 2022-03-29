@@ -8,7 +8,7 @@ class Database{
         $password = "";
         
         try {
-          $conn = new PDO("mysql:host=$servername;dbname=estudoapi", $username, $password);
+          $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           $this->conn= $conn;
         } catch(PDOException $e) {
