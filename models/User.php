@@ -1,5 +1,4 @@
 <?php 
-require ('./helpers/database.php');
 class User{
     public $id;
     public $name;
@@ -23,7 +22,9 @@ class User{
             echo "Cadastrado com sucesso";
         }
         catch(PDOException $e){
-            echo "Error : " . $e->getMessage();
+            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
         }
     }
     function delete(){
@@ -35,7 +36,9 @@ class User{
                 echo "Deletado com sucesso";
             }
             catch(PDOException $e){
-                echo "Error : " . $e->getMessage();
+            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
             }
     }
     function update(){
@@ -50,7 +53,9 @@ class User{
             echo "Modificado com sucesso";
         }
         catch(PDOException $e){
-            echo "Error : " . $e->getMessage();
+            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
         }   
     }
     function selectAll(){
@@ -59,11 +64,14 @@ class User{
             $stmt = $db->conn->prepare("SELECT * FROM users");
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            print_r($result);
-            echo "Selecionado com sucesso";
+            
+           $response = new Output();
+           $response->out($result);
         }
         catch(PDOException $e){
-            echo "Error : " . $e->getMessage();
+            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
         }   
     }
     function selectByid(){
@@ -77,7 +85,9 @@ class User{
             echo "Selecionado o usuário com sucesso";
         }
         catch(PDOException $e){
-            echo "Error : " . $e->getMessage();
+            $result['message'] = "Error Select All User: " . $e->getMessage();
+            $response = new Output();
+            $response->out($result, 500);
         }   
     }
 }

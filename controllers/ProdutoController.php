@@ -7,10 +7,14 @@ if(isset($route[1]) && $route[1] != ''){
     }elseif ($route[1] == 'delete') {
         $user->delete();
     }else{
-        echo "Página não econtrada";
+        $result['message'] = '404 - Rota Api Não Encontrada';
+    $response = new Output();
+    $response ->out($result, 404);
     }
 }else{
-    echo "Página não econtrada";
+    $result['message'] = '404 - Rota Api Não Encontrada';
+    $response = new Output();
+    $response ->out($result, 404);
 }
 
 ?>

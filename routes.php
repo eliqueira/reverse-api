@@ -6,15 +6,16 @@ $urlClean = substr($url, $lengthStrFolder); // separa a string por partes
 
 $route = explode('/', $urlClean);
 
-spl_autoload_register(function($class_name){
-    require 'models/'. $class_name . '.php';
-});
+//carrega autoloaders
+require ('helpers/autoloader.php');
 
 if($route[0] == 'user'){
     require('controllers/UserController.php');
 } elseif($route[0] == 'produto'){
     require('controllers/ProdutoController.php');
 }else {
-    echo "404 - Página não encontrada";
+    $result['message'] = '404 - Rota Api Não Encontrada';
+    $response = new Output();
+    $response ->out($result, 404);
 }
 ?>
