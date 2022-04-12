@@ -20,14 +20,8 @@ class User{
             $stmt->bindParam(':pass' , $this->pass);
             $stmt->execute();
             $id = $db->conn->lastInsertId();
-
-            $result['message'] = "Criado com sucesso";
-            $result['user']['id'] = $id;
-            $result['user']['name'] = $this->name;
-            $result['user']['email'] = $this->email;
-            $result['user']['pass'] = $this->pass;
-            $response = new Output();
-            $response->out($result);
+            
+            return $id;
         }
         catch(PDOException $e){
             $result['message'] = "Error Select All User: " . $e->getMessage();
@@ -41,12 +35,7 @@ class User{
                 $stmt = $db->conn->prepare("DELETE FROM users WHERE id = :id;");
                 $stmt->bindParam(':id', $this->id);
                 $stmt->execute();
-                $id = $db->conn->lastInsertId();
-
-                $result['message'] = "Deletado com sucesso";
-                $result['user']['id'] = $this->id;
-                $response = new Output();
-                $response->out($result);
+                return true;
             }
             catch(PDOException $e){
             $result['message'] = "Error Select All User: " . $e->getMessage();
@@ -63,16 +52,7 @@ class User{
             $stmt->bindParam(':email', $this->email);
             $stmt->bindParam(':pass', $this->pass);
             $stmt->execute();
-            
-            $id = $db->conn->lastInsertId();
-
-            $result['message'] = "Atualizado com sucesso";
-            $result['user']['id'] = $this->id;
-            $result['user']['name'] = $this->name;
-            $result['user']['email'] = $this->email;
-            $result['user']['pass'] = $this->pass;
-            $response = new Output();
-            $response->out($result);
+            return true;
         }
         catch(PDOException $e){
             $result['message'] = "Error Select All User: " . $e->getMessage();
@@ -86,9 +66,7 @@ class User{
             $stmt = $db->conn->prepare("SELECT * FROM users");
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
-           $response = new Output();
-           $response->out($result);
+            return $result;
         }
         catch(PDOException $e){
             $result['message'] = "Error Select All User: " . $e->getMessage();
@@ -103,8 +81,7 @@ class User{
             $stmt->bindParam(':id', $this->id);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            print_r($result);
-            echo "Selecionado o usuário com sucesso";
+            return $result;
         }
         catch(PDOException $e){
             $result['message'] = "Error Select All User: " . $e->getMessage();
