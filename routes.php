@@ -1,13 +1,14 @@
 <?php
-define('FOLDER','/reverse-api/api/'); // cria a constante caminho padrão
+require('config.php'); 
+// cria a constante caminho padrão
 $url = $_SERVER['REQUEST_URI']; // pega o que está na url
-$lengthStrFolder = strlen(FOLDER); // guarda o tamanho da constante folder
+$lengthStrFolder = strlen(BASE_URL_API); // guarda o tamanho da constante folder
 $urlClean = substr($url, $lengthStrFolder); // separa a string por partes
-
-$route = explode('/', $urlClean);
+$routeWithouthParameters = explode('?', $urlClean);
+$route = explode('/', $routeWithouthParameters[0]);
 
 //carrega autoloaders
-require ('helpers/autoloader.php');
+require(HELPERS_FOLDER.'autoloader.php');
 
 //Cria objeto de resposta da api
 $response = new Output();
@@ -21,8 +22,7 @@ $controller_name = $route[0];
 $action = str_replace('-','',$route[1]);
 //Checa se o controller existe
 
-$controller_path = 'controllers/'.$route[0].'Controller.php';
-
+$controller_path = CONTROLLERS_FOLDER.$route[0].'Controller.php';
 //Checa se o arquivo do controller existe
 if(file_exists($controller_path)){
     $controller_class_name = $controller_name . "Controller";

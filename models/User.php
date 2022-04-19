@@ -80,7 +80,7 @@ class User{
             $stmt = $db->conn->prepare("SELECT * FROM users WHERE id = :id;");
             $stmt->bindParam(':id', $this->id);
             $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
         catch(PDOException $e){
