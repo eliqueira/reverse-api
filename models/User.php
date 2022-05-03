@@ -13,8 +13,8 @@ class User{
     function create(){
         $db = new Database();
         try{
-            $stmt = $db->conn->prepare("INSERT INTO users (name, email, pass)
-            VALUES (:name, :email, :pass)");
+            $stmt = $db->conn->prepare("INSERT INTO user (name, email, pass)
+            VALUES (:name, :email, :pass);");
             $stmt->bindParam(':name' , $this->name);
             $stmt->bindParam(':email' , $this->email);
             $stmt->bindParam(':pass' , $this->pass);
@@ -32,7 +32,7 @@ class User{
     function delete(){
             $db = new Database(); 
             try{
-                $stmt = $db->conn->prepare("DELETE FROM users WHERE id = :id;");
+                $stmt = $db->conn->prepare("DELETE FROM user WHERE id = :id;");
                 $stmt->bindParam(':id', $this->id);
                 $stmt->execute();
                 return true;
@@ -46,7 +46,7 @@ class User{
     function update(){
         $db = new Database(); 
         try{
-            $stmt = $db->conn->prepare("UPDATE users SET  name = :name, email = :email, pass = :pass WHERE id = :id;");
+            $stmt = $db->conn->prepare("UPDATE user SET  name = :name, email = :email, pass = :pass WHERE id = :id;");
             $stmt->bindParam(':id', $this->id);
             $stmt->bindParam(':name', $this->name);
             $stmt->bindParam(':email', $this->email);
@@ -63,7 +63,7 @@ class User{
     function selectAll(){
         $db = new Database(); 
         try{
-            $stmt = $db->conn->prepare("SELECT * FROM users");
+            $stmt = $db->conn->prepare("SELECT * FROM user");
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
@@ -77,7 +77,7 @@ class User{
     function selectByid(){
         $db = new Database(); 
         try{
-            $stmt = $db->conn->prepare("SELECT * FROM users WHERE id = :id;");
+            $stmt = $db->conn->prepare("SELECT * FROM user WHERE id = :id;");
             $stmt->bindParam(':id', $this->id);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);

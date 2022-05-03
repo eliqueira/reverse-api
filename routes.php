@@ -14,7 +14,7 @@ require(HELPERS_FOLDER.'autoloader.php');
 $response = new Output();
 
 if(!isset($route[0]) || !isset($route[1])){
-    $result['message'] = '404 - Rota Api Não Encontrada';
+    $result['message'] = '404 - Api Not Found.';
     $response ->out($result, 404);
 }
 
