@@ -20,13 +20,12 @@ class User{
             $stmt->bindParam(':pass' , $this->pass);
             $stmt->execute();
             $id = $db->conn->lastInsertId();
-            
             return $id;
         }
         catch(PDOException $e){
             $result['message'] = "Error Select All User: " . $e->getMessage();
             $response = new Output();
-            $response->out($result);
+            $response->out($result,500);
         }
     }
     function delete(){
@@ -40,7 +39,7 @@ class User{
             catch(PDOException $e){
             $result['message'] = "Error Select All User: " . $e->getMessage();
             $response = new Output();
-            $response->out($result);
+            $response->out($result,500);
             }
     }
     function update(){
@@ -63,7 +62,7 @@ class User{
     function selectAll(){
         $db = new Database(); 
         try{
-            $stmt = $db->conn->prepare("SELECT * FROM user");
+            $stmt = $db->conn->prepare("SELECT * FROM user;");
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;

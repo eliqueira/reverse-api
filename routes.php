@@ -22,10 +22,10 @@ $controller_name = $route[0];
 $action = str_replace('-','',$route[1]);
 //Checa se o controller existe
 
-$controller_path = CONTROLLERS_FOLDER.$route[0].'Controller.php';
+$controller_path = CONTROLLERS_FOLDER.$controller_name.'Controller.php';
 //Checa se o arquivo do controller existe
 if(file_exists($controller_path)){
-    $controller_class_name = $controller_name . "Controller";
+    $controller_class_name = $controller_name . 'Controller';
     $controller = new $controller_class_name();
     //Checa se a action do controller existe
     if(method_exists($controller,$action)){

@@ -1,6 +1,5 @@
 <?php
 class UserController{
-    
     function create(){
         $response = new Output();
         $response->allowedMethod('POST');
